@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Library Management System{% endblock %}
+
+{% block body %}
+    	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<div class="main-warp">
+		<!-- header section -->
+		<header class="header-section">
+			<div class="header-close">
+				<i class="fa fa-times"></i>
+			</div>
+			<div class="header-warp">
+				<a href="" class="site-logo">
+					<img src="./img/logo.png" alt="">
+				</a>
+				<img src="img/menu-icon.png" alt="" class="menu-icon">
+				<ul class="main-menu">
+					<li class="active"><a href="{{path('index')}}">Home</a></li>
+					<li><a href="{{path('books_index')}}">Book Gallery</a></li>
+					<li><a href="{{path('user_index')}}">User Details</a></li>
+					<li><a href="{{path('barrow_index')}}">Barrow Details</a></li>
+					<li><a href="{{path('batch_index')}}">Book Catogary</a></li>
+
+				</ul>
+				<div class="social-links-warp">
+					<div class="social-links">
+						<a href=""><i class="fa fa-behance"></i></a>
+						<a href=""><i class="fa fa-dribbble"></i></a>
+						<a href=""><i class="fa fa-twitter"></i></a>
+						<a href=""><i class="fa fa-facebook"></i></a>
+						<a href=""><i class="fa fa-pinterest"></i></a>
+					</div>
+					<div class="social-text">Find us on</div>
+				</div>
+			</div>
+			<div class="copyright">Colorlib 2018  @ All rights reserved</div>
+		</header>
+		<!-- header section end -->
+
+		<!-- Page section -->
+		<div class="page-section home-page">
+			<div class="hero-slider owl-carousel">
+				<div class="slider-item d-flex align-items-center set-bg" data-setbg="img/slider-bg-1.jpg" data-hash="slide-1">
+					<div class="si-text-box">
+						<span>Photography</span>
+						<h2>Project No. 1</h2>
+						<p>Ut pellentesque auctor lorem, at maximus lacus faucibus nec. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris auctor nunc non nulla euismod consequat. Pellentesque non mattis nulla. Fusce quis tempor risus, non elemen tum dui. Curabitur et mattis ex, a ultrices.</p>
+						<a href="" class="site-btn">Read More</a>
+					</div>
+					<div class="next-slide-show set-bg" data-setbg="img/slider-bg-2.jpg">
+						<a href="#slide-2" class="ns-btn">Next</a>
+					</div>
+				</div>
+				<div class="slider-item d-flex align-items-center set-bg" data-setbg="img/slider-bg-2.jpg"  data-hash="slide-2">
+					<div class="si-text-box">
+						<span>Photography</span>
+						<h2>Project No. 2</h2>
+						<p>Ut pellentesque auctor lorem, at maximus lacus faucibus nec. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris auctor nunc non nulla euismod consequat. Pellentesque non mattis nulla. Fusce quis tempor risus, non elemen tum dui. Curabitur et mattis ex, a ultrices.</p>
+						<a href="" class="site-btn">Read More</a>
+					</div>
+					<div class="next-slide-show set-bg" data-setbg="img/slider-bg-1.jpg">
+						<a href="#slide-1" class="ns-btn">Next</a>
+					</div>
+				</div>
+			</div>
+			<div id="snh-1"></div>
+		</div>
+		<!-- Page section end-->
+	</div>
+
+	<!-- Search model -->
+	<div class="search-model">
+		<div class="h-100 d-flex align-items-center justify-content-center">
+			<div class="search-close-switch">x</div>
+			<form class="search-moderl-form">
+				<input type="text" id="search-input" placeholder="Search here.....">
+			</form>
+		</div>
+	</div>
+	<!-- Search model end -->
+
+{% endblock %}

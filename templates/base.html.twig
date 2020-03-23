@@ -2,11 +2,32 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        	<meta name="description" content="Photo Gallery HTML Template">
+	        <meta name="keywords" content="endGam,gGaming, magazine, html">
+	        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+		{% block stylesheets %}
+        <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}"/>
+	    <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}"/>
+	    <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}"/>
+	    <link rel="stylesheet" href="{{asset('css/animate.css') }}"/>
+
+	    <!-- Main Stylesheets -->
+	    <link rel="stylesheet" href="{{asset('css/style.css')}}"/>
+		{% endblock %}
     </head>
     <body>
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+        	<!--====== Javascripts & Jquery ======-->
+	        <script src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
+	        <script src="{{asset('js/bootstrap.min.js')}}"></script>
+	        <script src="{{asset('js/owl.carousel.min.js')}}"></script>
+	        <script src="{{asset('js/jquery.nicescroll.min.js')}}"></script>
+	        <script src="{{asset('js/isotope.pkgd.min.js')}}"></script>
+	        <script src="{{asset('js/imagesloaded.pkgd.min.js')}}"></script>
+	        <script src="{{asset('js/circle-progress.min.js')}}"></script>
+	        <script src="{{asset('js/main.js')}}"></script>
+        {% endblock %}
     </body>
 </html>

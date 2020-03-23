@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Batch index{% endblock %}
+
+{% block body %}
+    <h1>Batch index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Catogary</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>NoOfBook</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for batch in batches %}
+            <tr>
+                <td>{{ batch.id }}</td>
+                <td>{{ batch.name }}</td>
+                <td>{{ batch.catogary }}</td>
+                <td>{{ batch.description }}</td>
+                <td>{{ batch.price }}</td>
+                <td>{{ batch.noOfBook }}</td>
+                <td>
+                    <a href="{{ path('batch_show', {'id': batch.id}) }}">show</a>
+                    <a href="{{ path('batch_edit', {'id': batch.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('batch_new') }}">Create new</a>
+{% endblock %}

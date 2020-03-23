@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Barrow{% endblock %}
+
+{% block body %}
+    <h1>Create new Barrow</h1>
+
+    {{ include('barrow/_form.html.twig') }}
+
+    <a href="{{ path('barrow_index') }}">back to list</a>
+{% endblock %}
