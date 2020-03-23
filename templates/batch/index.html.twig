@@ -3,8 +3,51 @@
 {% block title %}Batch index{% endblock %}
 
 {% block body %}
-    <h1>Batch index</h1>
 
+        
+            	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<div class="main-warp">
+		<!-- header section -->
+		<header class="header-section">
+			<div class="header-close">
+				<i class="fa fa-times"></i>
+			</div>
+			<div class="header-warp">
+				<a href="" class="site-logo">
+					<img src="{{asset('img/logo.png')}}" alt="">
+				</a>
+				<img src="img/menu-icon.png" alt="" class="menu-icon">
+				<ul class="main-menu">
+					<li class="active"><a href="{{path('index')}}">Home</a></li>
+					<li><a href="{{path('books_index')}}">Book Gallery</a></li>
+					<li><a href="{{path('user_index')}}">User Details</a></li>
+					<li><a href="{{path('barrow_index')}}">Barrow Details</a></li>
+                    <li><a href="{{path('batch_index')}}">Book Catogary</a></li>
+				</ul>
+				<div class="social-links-warp">
+					<div class="social-links">
+						<a href=""><i class="fa fa-behance"></i></a>
+						<a href=""><i class="fa fa-dribbble"></i></a>
+						<a href=""><i class="fa fa-twitter"></i></a>
+						<a href=""><i class="fa fa-facebook"></i></a>
+						<a href=""><i class="fa fa-pinterest"></i></a>
+					</div>
+					<div class="social-text">Find us on</div>
+				</div>
+			</div>
+			<div class="copyright">Colorlib 2018  @ All rights reserved</div>
+		</header>
+		<!-- header section end -->
+
+		<!-- Page section -->
+		<div class="page-section home-page">
+                <h2>Batch index</h2>
+
+                
     <table class="table">
         <thead>
             <tr>
@@ -40,4 +83,8 @@
     </table>
 
     <a href="{{ path('batch_new') }}">Create new</a>
+		</div>
+		<!-- Page section end-->
+	</div>
+
 {% endblock %}
