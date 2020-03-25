@@ -19,7 +19,7 @@ class Books
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=7)
+     * @ORM\Column(type="string", length=3)
      */
     private $type;
 
@@ -29,24 +29,24 @@ class Books
     private $status;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $description;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Batch", inversedBy="books")
+     * @ORM\OneToOne(targetEntity="App\Entity\Batch", inversedBy="books", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $batch;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Barrow", mappedBy="book")
+     * @ORM\OneToOne(targetEntity="App\Entity\Barrow", mappedBy="book", cascade={"persist", "remove"})
      */
-    private $barrows;
+    private $barrow;
 
-    public function __construct()
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
+
+    public function _toString()
     {
-        $this->barrows = new ArrayCollection();
+        return strval($this->id);
     }
 
     public function getId(): ?int
@@ -78,58 +78,45 @@ class Books
         return $this;
     }
 
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
     public function getBatch(): ?Batch
     {
         return $this->batch;
     }
 
-    public function setBatch(?Batch $batch): self
+    public function setBatch(Batch $batch): self
     {
         $this->batch = $batch;
 
         return $this;
     }
 
-    /**
-     * @return Collection|Barrow[]
-     */
-    public function getBarrows(): Collection
+    public function getBarrow(): ?Barrow
     {
-        return $this->barrows;
+        return $this->barrow;
     }
 
-    public function addBarrow(Barrow $barrow): self
+    public function setBarrow(Barrow $barrow): self
     {
-        if (!$this->barrows->contains($barrow)) {
-            $this->barrows[] = $barrow;
+        $this->barrow = $barrow;
+
+        // set the owning side of the relation if necessary
+        if ($barrow->getBook() !== $this) {
             $barrow->setBook($this);
         }
 
         return $this;
     }
 
-    public function removeBarrow(Barrow $barrow): self
+    public function getDescription(): ?string
     {
-        if ($this->barrows->contains($barrow)) {
-            $this->barrows->removeElement($barrow);
-            // set the owning side to null (unless already changed)
-            if ($barrow->getBook() === $this) {
-                $barrow->setBook(null);
-            }
-        }
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }
+
 }

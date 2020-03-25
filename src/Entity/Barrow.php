@@ -17,16 +17,16 @@ class Barrow
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="barrows")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $user;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Books", inversedBy="barrows")
+     * @ORM\OneToOne(targetEntity="App\Entity\Books", inversedBy="barrow", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $book;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="barrow", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     /**
      * @ORM\Column(type="date")
@@ -38,21 +38,14 @@ class Barrow
      */
     private $dueDate;
 
+    public function _toString()
+    {
+        return strval($this->id);
+    }
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
     }
 
     public function getBook(): ?Books
@@ -60,9 +53,21 @@ class Barrow
         return $this->book;
     }
 
-    public function setBook(?Books $book): self
+    public function setBook(Books $book): self
     {
         $this->book = $book;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

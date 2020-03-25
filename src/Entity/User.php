@@ -19,7 +19,7 @@ class User
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="string", length=255)
      */
     private $role;
 
@@ -31,12 +31,17 @@ class User
     /**
      * @ORM\Column(type="string", length=255)
      */
+    private $fName;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $lName;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $fName;
+    private $tp;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -44,18 +49,13 @@ class User
     private $email;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\OneToOne(targetEntity="App\Entity\Barrow", mappedBy="user", cascade={"persist", "remove"})
      */
-    private $tp;
+    private $barrow;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Barrow", mappedBy="user")
-     */
-    private $barrows;
-
-    public function __construct()
+    public function _toString()
     {
-        $this->barrows = new ArrayCollection();
+        return strval($this->id);
     }
 
     public function getId(): ?int
@@ -87,6 +87,18 @@ class User
         return $this;
     }
 
+    public function getFName(): ?string
+    {
+        return $this->fName;
+    }
+
+    public function setFName(string $fName): self
+    {
+        $this->fName = $fName;
+
+        return $this;
+    }
+
     public function getLName(): ?string
     {
         return $this->lName;
@@ -99,14 +111,14 @@ class User
         return $this;
     }
 
-    public function getFName(): ?string
+    public function getTp(): ?string
     {
-        return $this->fName;
+        return $this->tp;
     }
 
-    public function setFName(string $fName): self
+    public function setTp(string $tp): self
     {
-        $this->fName = $fName;
+        $this->tp = $tp;
 
         return $this;
     }
@@ -123,44 +135,18 @@ class User
         return $this;
     }
 
-    public function getTp(): ?int
+    public function getBarrow(): ?Barrow
     {
-        return $this->tp;
+        return $this->barrow;
     }
 
-    public function setTp(int $tp): self
+    public function setBarrow(Barrow $barrow): self
     {
-        $this->tp = $tp;
+        $this->barrow = $barrow;
 
-        return $this;
-    }
-
-    /**
-     * @return Collection|Barrow[]
-     */
-    public function getBarrows(): Collection
-    {
-        return $this->barrows;
-    }
-
-    public function addBarrow(Barrow $barrow): self
-    {
-        if (!$this->barrows->contains($barrow)) {
-            $this->barrows[] = $barrow;
+        // set the owning side of the relation if necessary
+        if ($barrow->getUser() !== $this) {
             $barrow->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBarrow(Barrow $barrow): self
-    {
-        if ($this->barrows->contains($barrow)) {
-            $this->barrows->removeElement($barrow);
-            // set the owning side to null (unless already changed)
-            if ($barrow->getUser() === $this) {
-                $barrow->setUser(null);
-            }
         }
 
         return $this;

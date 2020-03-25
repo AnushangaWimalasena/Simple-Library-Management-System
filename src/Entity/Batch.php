@@ -19,6 +19,11 @@ class Batch
     private $id;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Books", mappedBy="batch", cascade={"persist", "remove"})
+     */
+    private $books;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $name;
@@ -43,19 +48,31 @@ class Batch
      */
     private $noOfBook;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Books", mappedBy="batch")
-     */
-    private $books;
-
-    public function __construct()
+    public function _toString()
     {
-        $this->books = new ArrayCollection();
+        return strval($this->id);
     }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getBooks(): ?Books
+    {
+        return $this->books;
+    }
+
+    public function setBooks(Books $books): self
+    {
+        $this->books = $books;
+
+        // set the owning side of the relation if necessary
+        if ($books->getBatch() !== $this) {
+            $books->setBatch($this);
+        }
+
+        return $this;
     }
 
     public function getName(): ?string
@@ -114,37 +131,6 @@ class Batch
     public function setNoOfBook(int $noOfBook): self
     {
         $this->noOfBook = $noOfBook;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Books[]
-     */
-    public function getBooks(): Collection
-    {
-        return $this->books;
-    }
-
-    public function addBook(Books $book): self
-    {
-        if (!$this->books->contains($book)) {
-            $this->books[] = $book;
-            $book->setBatch($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBook(Books $book): self
-    {
-        if ($this->books->contains($book)) {
-            $this->books->removeElement($book);
-            // set the owning side to null (unless already changed)
-            if ($book->getBatch() === $this) {
-                $book->setBatch(null);
-            }
-        }
 
         return $this;
     }

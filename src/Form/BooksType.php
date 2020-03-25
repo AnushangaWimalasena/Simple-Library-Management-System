@@ -3,9 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Books;
+use App\Entity\Batch;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class BooksType extends AbstractType
 {
@@ -15,7 +17,14 @@ class BooksType extends AbstractType
             ->add('type')
             ->add('status')
             ->add('description')
-            ->add('batch')
+            ->add('batch',EntityType::class,[
+                'required'=>true,
+                'class'=>Batch::class,
+                'placeholder'=>'Batch',
+                'choice_label'=>function($batch){
+                    return $batch->getName();
+                }
+            ])
         ;
     }
 
