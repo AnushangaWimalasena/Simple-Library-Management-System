@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Usersecure{% endblock %}
+
+{% block body %}
+    <h1>Usersecure</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ usersecure.id }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ usersecure.email }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ usersecure.roles ? usersecure.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ usersecure.password }}</td>
+            </tr>
+            <tr>
+                <th>IsActive</th>
+                <td>{{ usersecure.isActive ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('usersecure_index') }}">back to list</a>
+
+    <a href="{{ path('usersecure_edit', {'id': usersecure.id}) }}">edit</a>
+
+    {{ include('usersecure/_delete_form.html.twig') }}
+{% endblock %}

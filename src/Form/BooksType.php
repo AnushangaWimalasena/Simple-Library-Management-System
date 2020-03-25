@@ -21,8 +21,9 @@ class BooksType extends AbstractType
                 'required'=>true,
                 'class'=>Batch::class,
                 'placeholder'=>'Batch',
+                'label'=>'Batch',
                 'choice_label'=>function($batch){
-                    return $batch->getName();
+                    return $batch->getId();
                 }
             ])
         ;

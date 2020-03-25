@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Usersecure{% endblock %}
+
+{% block body %}
+    <h1>Edit Usersecure</h1>
+
+    {{ include('usersecure/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('usersecure_index') }}">back to list</a>
+
+    {{ include('usersecure/_delete_form.html.twig') }}
+{% endblock %}

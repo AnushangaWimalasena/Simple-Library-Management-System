@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Usersecure index{% endblock %}
+
+{% block body %}
+    <h1>Usersecure index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Password</th>
+                <th>IsActive</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for usersecure in usersecures %}
+            <tr>
+                <td>{{ usersecure.id }}</td>
+                <td>{{ usersecure.email }}</td>
+                <td>{{ usersecure.roles ? usersecure.roles|json_encode : '' }}</td>
+                <td>{{ usersecure.password }}</td>
+                <td>{{ usersecure.isActive ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('usersecure_show', {'id': usersecure.id}) }}">show</a>
+                    <a href="{{ path('usersecure_edit', {'id': usersecure.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('usersecure_new') }}">Create new</a>
+{% endblock %}
